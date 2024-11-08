@@ -14,7 +14,10 @@ df_pivot.columns = ['Date', 'Catégorie_Produit', 'Événement_Spécial', 'Mois'
 # Remplacer les valeurs manquantes par 0 (si certaines combinaisons de canaux sont absentes pour certaines dates)
 df_pivot.fillna(0, inplace=True)
 
+montant_cols = [col for col in df_pivot.columns if col.startswith('Montant_Ventes')]
+df_pivot[montant_cols] = df_pivot[montant_cols].astype(int)
+
 # Enregistrer le nouveau DataFrame dans un fichier CSV
-df_pivot.to_csv('nouveau_fichier.csv', index=False, sep=';')
+df_pivot.to_csv('ventes_luxe_processed.csv', index=False, sep=';')
 
 print("Le nouveau fichier CSV a été créé avec succès.")
